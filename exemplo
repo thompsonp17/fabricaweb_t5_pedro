@@ -1,6 +1,6 @@
 ﻿insert into usuario (nome, login, senha) values ('Maria', 'mar', '123456')
 
-select * from usuario order by nome
+select * from usuario where id=3
 
 update usuario set nome='Jão da Silva' where id=1
 

@@ -2,7 +2,10 @@ package br.com.fabricadeprogramador.persistencia.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.fabricadeprogramador.entidade.Usuario;
 
@@ -60,4 +63,76 @@ public class UsuarioDAO {
 		}
 	}
 
+	public String salvar(Usuario user){
+		if(user.getId()!=null){
+			alterar(user);
+			return "Usuário alterado!";
+		}else{
+			cadastrar(user);
+			return "Novo usuário cadastrado!";
+		}
+	}
+
+	
+	/**
+	 * Busca de um registro no banco de dados utilizando pelo número do id do usuário.
+	 * @param id É um inteiro que representa o número do id do usuário a ser buscado.
+	 * @return Retorna uma instância do objeto Usuario, sendo este preenchido se o usuário existir no banco e com propriedades nulas e nome "usuário não existente" se o usuário não for encontrado.
+	 */
+	
+	public Usuario buscaPorId(Integer id) {
+		Usuario user = null;
+
+		String sql = "select * from usuario where id=?";
+		
+		try(PreparedStatement preparador = con.prepareStatement(sql)) {
+			preparador.setInt(1, id);
+			//executando a query sql
+			ResultSet resultado = preparador.executeQuery();
+			if(resultado.next()){
+				user = new Usuario();
+				user.setId(resultado.getInt("id"));
+				user.setNome(resultado.getString("nome"));
+				user.setLogin(resultado.getString("login"));
+				user.setSenha(resultado.getString("senha"));
+			}else{
+				user = new Usuario();
+				user.setNome("usuário não encontrado");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return user;
+	}
+
+	public List<Usuario> buscaTodos() {
+		Usuario user = null;
+
+		String sql = "select * from usuario";
+		
+		List<Usuario> listaUsers = new ArrayList<Usuario>();
+		
+		try(PreparedStatement preparador = con.prepareStatement(sql)) {
+			
+			ResultSet resultado = preparador.executeQuery();
+			while(resultado.next()){
+				user = new Usuario();
+				user.setId(resultado.getInt("id"));
+				user.setNome(resultado.getString("nome"));
+				user.setLogin(resultado.getString("login"));
+				user.setSenha(resultado.getString("senha"));
+				listaUsers.add(user);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return listaUsers;
+	}
+	
 }
