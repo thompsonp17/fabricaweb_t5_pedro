@@ -1,0 +1,15 @@
+﻿insert into usuario (nome, login, senha) values ('Maria', 'mar', '123456')
+
+select * from usuario order by nome
+
+update usuario set nome='Jão da Silva' where id=1
+
+delete from usuario where id=2
+
+select * from usuario
+
+/* Create - insert
+   Retrieve - select
+   Update - update
+   Delete - Delete
+   */
