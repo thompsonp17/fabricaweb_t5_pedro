@@ -30,4 +30,12 @@ public class Usuario {
 		this.senha = senha;
 	}
 	
+	public String toString(){
+		String strg = "Usuario [ Id: " + getId() + " | Nome: " + getNome() + 
+				" | Login: " + getLogin() + " | Senha: " + getSenha() + 
+				" ]";
+		
+		return strg;
+	}
+	
 }

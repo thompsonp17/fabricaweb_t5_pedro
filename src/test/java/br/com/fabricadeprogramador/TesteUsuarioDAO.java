@@ -17,11 +17,7 @@ public class TesteUsuarioDAO {
 		List<Usuario> lista = TestaBuscaTodosOsUsuarios();
 		System.out.println("*****Lista de Usuarios******");
 		for(Usuario user : lista){
-			System.out.print("Id: " + user.getId());
-			System.out.print(" | Nome: " + user.getNome());
-			System.out.print(" | Login: " + user.getLogin());
-			System.out.print(" | Senha: " + user.getSenha());
-			System.out.println("");
+			System.out.println(user.toString());
 		}
 		System.out.println("*****FIM******");
 		
