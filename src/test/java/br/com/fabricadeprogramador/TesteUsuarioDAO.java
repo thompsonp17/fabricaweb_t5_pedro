@@ -14,12 +14,18 @@ public class TesteUsuarioDAO {
 		//testeExcluir();
 		//testeSalvar();
 		
-		List<Usuario> lista = TestaBuscaTodosOsUsuarios();
-		System.out.println("*****Lista de Usuarios******");
-		for(Usuario user : lista){
-			System.out.println(user.toString());
-		}
-		System.out.println("*****FIM******");
+		//List<Usuario> lista = TestaBuscaTodosOsUsuarios();
+		//System.out.println("*****Lista de Usuarios******");
+		//for(Usuario user : lista){
+			//System.out.println(user.toString());
+		//}
+		//System.out.println("*****FIM******");
+		
+		Usuario userConsult = new Usuario();
+		userConsult.setLogin("thomp");
+		userConsult.setSenha("xxx123");
+		userConsult = testeAutenticar(userConsult);
+		System.out.println(userConsult.toString());
 		
 	}
 
@@ -100,6 +106,11 @@ public class TesteUsuarioDAO {
 		
 		return listaUsers;
 	}
-
+	
+	private static Usuario testeAutenticar(Usuario userConsult){
+		UsuarioDAO userDAO = new UsuarioDAO();
+		userConsult = userDAO.autenticar(userConsult);
+		return userConsult;
+	}
 	
 }

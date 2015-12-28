@@ -135,4 +135,32 @@ public class UsuarioDAO {
 		return listaUsers;
 	}
 	
+	/**
+	 * Realiza a autenticação do usuário através de login e senha.
+	 * @param userConsult Usuário configurado com determinado login e senha.
+	 * @return Usuário completo, se localizado e autenticado, ou NULO, se não encontrado.
+	 */
+	public Usuario autenticar(Usuario userConsult){
+			
+		String sql = "Select * from usuario where login=? and senha=?";
+		
+		try(PreparedStatement preparador = con.prepareStatement(sql)){
+			preparador.setString(1, userConsult.getLogin());
+			preparador.setString(2, userConsult.getSenha());
+			ResultSet result = preparador.executeQuery();
+			if(result.next()){
+				userConsult.setId(result.getInt("id"));
+				userConsult.setNome(result.getString("nome"));
+			}else{
+				userConsult.setNome(null);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return userConsult;
+		
+	}
+	
+	
 }

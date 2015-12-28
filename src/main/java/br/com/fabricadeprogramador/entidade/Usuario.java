@@ -31,9 +31,14 @@ public class Usuario {
 	}
 	
 	public String toString(){
-		String strg = "Usuario [ Id: " + getId() + " | Nome: " + getNome() + 
-				" | Login: " + getLogin() + " | Senha: " + getSenha() + 
-				" ]";
+		
+		String strg = "Usuário nulo.";
+		
+		if(this.nome!=null){
+			 strg = "Usuario [ Id: " + getId() + " | Nome: " + getNome() + 
+					" | Login: " + getLogin() + " | Senha: " + getSenha() + 
+					" ]";
+		}
 		
 		return strg;
 	}
